@@ -46,4 +46,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function words()
+    {
+        return $this->belongsToMany(Word::class,'word_user')->withTimestamps();
+    }
 }
