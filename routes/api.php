@@ -21,6 +21,8 @@ Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logo
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/words', [WordController::class, 'store']);
+    Route::get('/words/latest', [WordController::class, 'latest']);
+    Route::get('/words/random-user', [WordController::class, 'randomUser']);
     Route::patch('/words/{id}/learned', [WordController::class, 'updateLearned']);
     Route::patch('/words/{id}/favorite', [WordController::class, 'updateFavorite']);
 });

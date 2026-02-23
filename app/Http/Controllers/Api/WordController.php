@@ -107,4 +107,31 @@ class WordController extends Controller
             'is_favorite' => $request->is_favorite
         ]);
     }
+
+    public function latest(Request $request)
+    {
+        $words = $request->user()
+            ->words()
+            ->orderByPivot('created_at', 'desc')
+            ->take(10)
+            ->get();
+
+        return response()->json($words);
+    }
+
+    public function randomUser(Request $request)
+    {
+        $word = $request->user()
+            ->words()
+            ->inRandomOrder()
+            ->first();
+
+        if (!$word) {
+            return response()->json([
+                'message' => 'No words found'
+            ], 404);
+        }
+
+        return response()->json($word);
+    }
 }
