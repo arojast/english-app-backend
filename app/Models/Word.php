@@ -23,6 +23,11 @@ class Word extends Model
         
     ];
 
+    protected $casts = [
+        'synonyms' => 'array',
+        'antonyms' => 'array',
+    ];
+
     public function users()
     {
         return $this->belongsToMany(User::class,'word_user')->withTimestamps();
