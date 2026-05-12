@@ -119,6 +119,19 @@ class WordController extends Controller
         return response()->json($words);
     }
 
+    public function findAll(Request $request)
+    {
+        $search = $request->query('search', '');
+        $words = $request->user()
+            ->words()
+            ->where('word', 'like', '%' . $search . '%')
+            ->orderBy('word', 'asc')
+            ->paginate(10);
+
+        return $words;
+
+    }
+
     public function randomUser(Request $request)
     {
         $word = $request->user()
