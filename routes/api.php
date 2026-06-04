@@ -19,7 +19,7 @@ Route::middleware('auth:sanctum')->get('/me', function (Request $request) {
 
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 
-// Word routes --
+// Word routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/words', [WordController::class, 'store']);
     Route::get('/words/latest', [WordController::class, 'latest']);
