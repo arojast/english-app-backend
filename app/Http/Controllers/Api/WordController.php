@@ -19,10 +19,10 @@ class WordController extends Controller
 
         $wordText = strtolower($request->word);
 
-        // 1️⃣ Check if word exists
+        // Check if word exists
         $word = Word::where('word', $wordText)->first();
 
-        // 2️⃣ If not exists → call API
+        // If not exists → call API
         if (!$word) {
 
             $response = Http::get("https://api.dictionaryapi.dev/api/v2/entries/en/{$wordText}");
@@ -53,7 +53,7 @@ class WordController extends Controller
             ]);
         }
 
-        // 3️⃣ Attach to user (no duplicates)
+        // Attach to user (no duplicates)
         $request->user()->words()->syncWithoutDetaching([$word->id]);
 
         return response()->json([

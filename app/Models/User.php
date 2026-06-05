@@ -49,6 +49,8 @@ class User extends Authenticatable
 
     public function words()
     {
-        return $this->belongsToMany(Word::class,'word_user')->withTimestamps();
+        return $this->belongsToMany(Word::class,'word_user')
+            ->withPivot('is_favorite', 'is_learned')
+            ->withTimestamps();
     }
 }
