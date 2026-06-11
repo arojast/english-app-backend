@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Word;
 
+//project translate words
+use Stichoza\GoogleTranslate\GoogleTranslate;
+
 
 class WordController extends Controller
 {
@@ -42,10 +45,14 @@ class WordController extends Controller
             $synonyms = $data[0]['meanings'][0]['definitions'][0]['synonyms'] ?? [];
             $antonyms = $data[0]['meanings'][0]['definitions'][0]['antonyms'] ?? [];
 
+            //service translate word
+            $tr = new GoogleTranslate('es');
+            $translate = $tr->translate($wordText);
+
             $word = Word::create([
                 'word' => $wordText,
                 'meaning' => $meaning,
-                'translate' => '',
+                'translate' => $translate,
                 'pronunciation' => $pronunciation,
                 'audio_url' => $audio,
                 'synonyms' => json_encode($synonyms),
