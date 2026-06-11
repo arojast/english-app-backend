@@ -115,7 +115,7 @@ class WordController extends Controller
         ]);
     }
 
-    public function latest(Request $request)
+    public function last(Request $request)
     {
         $words = $request->user()
             ->words()

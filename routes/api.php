@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logo
 // Word routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/words', [WordController::class, 'store']);
-    Route::get('/words/latest', [WordController::class, 'latest']);
+    Route::get('/words/last', [WordController::class, 'last']);
     Route::get('/words', [WordController::class, 'findAll']);
     Route::get('/words/random-user', [WordController::class, 'randomUser']);
     Route::patch('/words/{id}/learned', [WordController::class, 'updateLearned']);
